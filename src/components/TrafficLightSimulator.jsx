@@ -1,6 +1,8 @@
 import React from 'react';
 
 const TrafficLightSimulator = () => {
+    const [activeLight, setActiveLight] = useState('red');
+
   return (
     <div className="traffic-light-container">
       <div className="light red"></div>
@@ -10,7 +12,9 @@ const TrafficLightSimulator = () => {
   );
 };
 
-// Embedded CSS
+
+
+
 const styleSheet = document.createElement('style');
 styleSheet.textContent = `
   .traffic-light-container {
@@ -31,6 +35,11 @@ styleSheet.textContent = `
     height: 80px;
     border-radius: 50%;
     opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+  
+  .light.active {
+    opacity: 1;
   }
   
   .red { background-color: #ff0000; }
