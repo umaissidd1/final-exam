@@ -3,6 +3,21 @@ import React from 'react';
 const TrafficLightSimulator = () => {
     const [activeLight, setActiveLight] = useState('red');
 
+
+useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveLight(prev => {
+        if (prev === 'red') return 'yellow';
+        if (prev === 'yellow') return 'green';
+        return 'red';
+      });
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+    
+
   return (
     <div className="traffic-light-container">
       <div className="light red"></div>
@@ -35,17 +50,22 @@ styleSheet.textContent = `
     height: 80px;
     border-radius: 50%;
     opacity: 0.3;
-    transition: opacity 0.3s ease;
+    transition: all 0.5s ease;
   }
   
   .light.active {
     opacity: 1;
+    box-shadow: 
+      0 0 20px 5px rgba(255, 255, 255, 0.7),
+      inset 0 0 10px rgba(255, 255, 255, 0.5);
   }
   
-  .red { background-color: #ff0000; }
-  .yellow { background-color: #ffff00; }
-  .green { background-color: #00ff00; }
+  .red.active { box-shadow: 0 0 20px 5px rgba(255, 0, 0, 0.7); }
+  .yellow.active { box-shadow: 0 0 20px 5px rgba(255, 255, 0, 0.7); }
+  .green.active { box-shadow: 0 0 20px 5px rgba(0, 255, 0, 0.7); }
 `;
 document.head.appendChild(styleSheet);
 
 export default TrafficLightSimulator;
+
+  
